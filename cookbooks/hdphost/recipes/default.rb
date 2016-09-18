@@ -8,6 +8,7 @@
 #
 file '/etc/hosts' do
   node_list = search(:cluster, "id:nodes").first
+  # When adding the loopback interface
   #partial = "127.0.0.1\t#{node.name}\t#{node.name}\n"
   partial = ""
   node_list.each do |n|
