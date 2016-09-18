@@ -10,6 +10,7 @@ This project is an attempt to recreate a minimalistic infrastructure that provid
 ## Installation
 ```sh
 git clone https://github.com/canimus/hadoop273.git
+cd hadoop273
 vagrant up
 ```
 
@@ -22,3 +23,10 @@ It will create 4 virtial boxes named
 3. DataNode1 (dn1)
 4. DataNode2 (dn2)
 5. DataNode3 (dn3)
+
+
+## Configuration
+
+```ruby
+(1..3).each # This specified the number of DataNodes in the Vagrantfile
+```
