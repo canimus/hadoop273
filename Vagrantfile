@@ -20,43 +20,22 @@ Vagrant.configure("2") do |config|
 
   end
 
-  config.vm.define "datanode1" do |dn1|
-    dn1.vm.box = "hadoop273"
-    dn1.vm.hostname = "dn1"
-    dn1.vm.network "private_network", ip: "10.10.10.3", virtualbox__intnet: "intnet"
-    dn1.vm.provider "virtualbox" do |vb|
-      vb.memory = "1020"
-    end
-    dn1.vm.provision "chef_solo" do |chef|
-      chef.add_recipe "hdphost"
-      chef.data_bags_path = "data_bags"
-    end
-  end 
-  
-  config.vm.define "datanode2" do |dn2|
-    dn2.vm.box = "hadoop273"
-    dn2.vm.hostname = "dn2"
-    dn2.vm.network "private_network", ip: "10.10.10.4", virtualbox__intnet: "intnet"
-    dn2.vm.provider "virtualbox" do |vb|
-      vb.memory = "1020"
-    end
-    dn2.vm.provision "chef_solo" do |chef|
-      chef.add_recipe "hdphost"
-      chef.data_bags_path = "data_bags"
-    end
-  end
-  
-  config.vm.define "datanode3" do |dn3|
-    dn3.vm.box = "hadoop273"
-    dn3.vm.hostname = "dn3"
-    dn3.vm.network "private_network", ip: "10.10.10.5", virtualbox__intnet: "intnet"
-    dn3.vm.provider "virtualbox" do |vb|
-      vb.memory = "1020"
-    end
-    dn3.vm.provision "chef_solo" do |chef|
-      chef.add_recipe "hdphost"
-      chef.data_bags_path = "data_bags"
-    end
+  (1..3).each do |i|
+   config.vm.define "dn#{i}" do |dn1|
+     dn1.vm.box = "hadoop273"
+     dn1.vm.hostname = "dn#{i}"
+     dn1.vm.network "private_network", ip: "10.10.10.#{i+2}.str", virtualbox__intnet: "intnet"
+
+     dn1.vm.provider "virtualbox" do |vb|
+       vb.memory = "1020"
+     end
+
+     dn1.vm.provision "chef_solo" do |chef|
+       chef.add_recipe "hdphost"
+       chef.data_bags_path = "data_bags"
+     end
+
+   end
   end
 
 end
