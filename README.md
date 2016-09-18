@@ -3,6 +3,7 @@
 This project is an attempt to recreate a minimalistic infrastructure that provides a training environment to experiment with **HDFS** and enable the visualization of the operation of a Hadoop Cluster in an encapsulated environment.
 
 ## Prerequisites
+
 1. Virtual Box 
 2. Vagrant
 
@@ -13,7 +14,9 @@ vagrant up
 ```
 
 ## Outcome
+
 It will create 4 virtial boxes named
+
 1. NameNode (nn)
 2. SecondaryNameNode (nn)
 3. DataNode1 (dn1)
