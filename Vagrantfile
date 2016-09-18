@@ -7,7 +7,9 @@ Vagrant.configure("2") do |config|
   config.vm.define "nn" do |nn|
     nn.vm.box = "hadoop273"
     nn.vm.hostname = "nn"
+    # Creating an internal network to communcate the cluster
     nn.vm.network "private_network", ip: "10.10.10.2", virtualbox__intnet: "intnet"
+    # Gaining access to the NameNode WebUI from host machine
     nn.vm.network "forwarded_port", guest: 50070, host: 50070
 
     nn.vm.provider "virtualbox" do |vb|

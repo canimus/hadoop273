@@ -16,3 +16,36 @@ file '/etc/hosts' do
   end
   content partial
 end
+
+remote_file "/vagrant/hadoop-2.7.3.tar.gz" do
+  source 'http://apache.rediris.es/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz'
+  owner 'vagrant'
+  group 'vagrant'
+  mode '0755'
+  action :create
+  notifies :run, 'execute[extract_hadoop_tar]', :immediately
+  not_if { File.exist? "/vagrant/hadoop-2.7.3.tar.gz"}
+end
+
+execute 'extract_hadoop_tar' do
+  command 'tar -xvf hadoop-2.7.3.tar.gz'
+  cwd '/vagrant'
+  user 'vagrant'
+  action :nothing
+  not_if { Dir.exist? "/vagrant/hadoop-2.7.3/" }
+end
+
+template '/vagrant/hadoop-2.7.3/etc/hadoop/core-site.xml' do
+  source 'core-site.xml.erb'
+  owner 'vagrant'
+  group 'vagrant'
+  mode '0755'
+  variables :hdfs => {"server" => "hdfs://10.10.10.2", "port" => "8020"}
+end
+
+cookbook_file "/vagrant/hadoop-2.7.3/etc/hadoop/hadoop-env.sh" do
+  source 'hadoop-env.sh'
+  owner 'vagrant'
+  group 'vagrant'
+  mode '0755'
+end
