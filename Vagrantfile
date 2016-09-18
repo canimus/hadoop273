@@ -3,7 +3,8 @@
 #
 Vagrant.configure("2") do |config|
 
-  config.vm.define "namenode" do |nn|
+  # Creation of NameNode and SecondaryNameNode
+  config.vm.define "nn" do |nn|
     nn.vm.box = "hadoop273"
     nn.vm.hostname = "nn"
     nn.vm.network "private_network", ip: "10.10.10.2", virtualbox__intnet: "intnet"
@@ -19,7 +20,8 @@ Vagrant.configure("2") do |config|
     end
 
   end
-
+  
+  # Creation of 3 DataNodes
   (1..3).each do |i|
    config.vm.define "dn#{i}" do |dn1|
      dn1.vm.box = "hadoop273"
