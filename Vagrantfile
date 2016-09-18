@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
    config.vm.define "dn#{i}" do |dn1|
      dn1.vm.box = "hadoop273"
      dn1.vm.hostname = "dn#{i}"
-     dn1.vm.network "private_network", ip: "10.10.10.#{i+2}.str", virtualbox__intnet: "intnet"
+     dn1.vm.network "private_network", ip: "10.10.10.#{i+2}", virtualbox__intnet: "intnet"
 
      dn1.vm.provider "virtualbox" do |vb|
        vb.memory = "1020"
