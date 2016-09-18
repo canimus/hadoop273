@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
 
   # Creation of NameNode and SecondaryNameNode
   config.vm.define "nn" do |nn|
-    nn.vm.box = "hadoop273"
+    nn.vm.box = "canimus/hadoop273"
     nn.vm.hostname = "nn"
     # Creating an internal network to communcate the cluster
     nn.vm.network "private_network", ip: "10.10.10.2", virtualbox__intnet: "intnet"
@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
   # Creation of 3 DataNodes
   (1..3).each do |i|
    config.vm.define "dn#{i}" do |dn1|
-     dn1.vm.box = "hadoop273"
+     dn1.vm.box = "canimus/hadoop273"
      dn1.vm.hostname = "dn#{i}"
      dn1.vm.network "private_network", ip: "10.10.10.#{i+2}", virtualbox__intnet: "intnet"
 
