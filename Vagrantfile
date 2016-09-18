@@ -7,11 +7,17 @@ Vagrant.configure("2") do |config|
     nn.vm.box = "hadoop273"
     nn.vm.hostname = "nn"
     nn.vm.network "private_network", ip: "10.10.10.2", virtualbox__intnet: "intnet"
-    #nn.vm.network "forwarded_port", guest: 8020, host: 8020
     nn.vm.network "forwarded_port", guest: 50070, host: 50070
+
     nn.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
     end
+
+    nn.vm.provision "chef_solo" do |chef|
+      chef.add_recipe "hdphost"
+      chef.data_bags_path = "data_bags"
+    end
+
   end
 
   config.vm.define "datanode1" do |dn1|
@@ -20,6 +26,10 @@ Vagrant.configure("2") do |config|
     dn1.vm.network "private_network", ip: "10.10.10.3", virtualbox__intnet: "intnet"
     dn1.vm.provider "virtualbox" do |vb|
       vb.memory = "1020"
+    end
+    dn1.vm.provision "chef_solo" do |chef|
+      chef.add_recipe "hdphost"
+      chef.data_bags_path = "data_bags"
     end
   end 
   
@@ -30,6 +40,10 @@ Vagrant.configure("2") do |config|
     dn2.vm.provider "virtualbox" do |vb|
       vb.memory = "1020"
     end
+    dn2.vm.provision "chef_solo" do |chef|
+      chef.add_recipe "hdphost"
+      chef.data_bags_path = "data_bags"
+    end
   end
   
   config.vm.define "datanode3" do |dn3|
@@ -38,6 +52,10 @@ Vagrant.configure("2") do |config|
     dn3.vm.network "private_network", ip: "10.10.10.5", virtualbox__intnet: "intnet"
     dn3.vm.provider "virtualbox" do |vb|
       vb.memory = "1020"
+    end
+    dn3.vm.provision "chef_solo" do |chef|
+      chef.add_recipe "hdphost"
+      chef.data_bags_path = "data_bags"
     end
   end
 
