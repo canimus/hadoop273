@@ -17,6 +17,8 @@ Vagrant.configure("2") do |config|
     nn.vm.provision "chef_solo" do |chef|
       chef.add_recipe "hdphost"
       chef.data_bags_path = "data_bags"
+      chef.roles_path = "roles"
+      chef.add_role("name_node")
     end
 
   end
@@ -35,6 +37,8 @@ Vagrant.configure("2") do |config|
      dn1.vm.provision "chef_solo" do |chef|
        chef.add_recipe "hdphost"
        chef.data_bags_path = "data_bags"
+       chef.roles_path = "roles"
+       chef.add_role("data_node")
      end
 
    end
