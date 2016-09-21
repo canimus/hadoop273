@@ -1,11 +1,10 @@
 #
 # Cookbook Name:: hdphost
 # Recipe:: default
-#
-# Copyright 2016, YOUR_COMPANY_NAME
-#
-# All rights reserved - Do Not Redistribute
-#
+# Author: Herminio Vazquez
+# Copyright 2016, Iovio Big Data
+# ================================
+
 file '/etc/hosts' do
   node_list = search(:cluster, "id:nodes").first
   # When adding the loopback interface
