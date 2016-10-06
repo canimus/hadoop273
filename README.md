@@ -28,5 +28,13 @@ It will create 4 virtial boxes named
 ## Configuration
 
 ```ruby
+# Integers for data nodes
 (1..3).each # This specified the number of DataNodes in the Vagrantfile
+
+# vb.memory
+vb.memory = 2048 # 2GB for NameNode
+vb.memory = 1024 # 1GB for DataNode
 ```
+## Hardware
+
+Preferable __5GB__ of memory available in host machine
