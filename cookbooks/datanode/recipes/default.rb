@@ -1,11 +1,10 @@
 #
 # Cookbook Name:: datanode
 # Recipe:: default
-#
-# Copyright 2016, YOUR_COMPANY_NAME
-#
-# All rights reserved - Do Not Redistribute
-#
+# Author: Herminio Vazquez
+# Copyright 2016, Iovio Big Data
+# ================================
+
 execute "remove_data_folders" do
   command "rm -rf /hadoop/data/dn"
 end
