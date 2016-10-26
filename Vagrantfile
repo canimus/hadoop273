@@ -1,6 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-#
+
+require 'oj'
+node_file = File.read("data_bags/cluster/nodes.json")
+nodes = Oj.load(node_file)
+
 Vagrant.configure("2") do |config|
 
   # Creation of NameNode and SecondaryNameNode
@@ -8,7 +12,7 @@ Vagrant.configure("2") do |config|
     nn.vm.box = "canimus/hadoop273"
     nn.vm.hostname = "nn"
     # Creating an internal network to communcate the cluster
-    nn.vm.network "private_network", ip: "10.10.10.2", virtualbox__intnet: "intnet"
+    nn.vm.network "private_network", ip: nodes["nn"], virtualbox__intnet: "intnet"
     # Gaining access to the NameNode WebUI from host machine
     nn.vm.network "forwarded_port", guest: 50070, host: 50070
 
@@ -30,7 +34,7 @@ Vagrant.configure("2") do |config|
    config.vm.define "dn#{i}" do |dn1|
      dn1.vm.box = "canimus/hadoop273"
      dn1.vm.hostname = "dn#{i}"
-     dn1.vm.network "private_network", ip: "10.10.10.#{i+2}", virtualbox__intnet: "intnet"
+     dn1.vm.network "private_network", ip: nodes["dn#{i}"], virtualbox__intnet: "intnet"
 
      dn1.vm.provider "virtualbox" do |vb|
        vb.memory = "1020"
@@ -51,7 +55,7 @@ Vagrant.configure("2") do |config|
     hv.vm.box = "canimus/hadoop273"
     hv.vm.hostname = "hv"
     # Creating an internal network to communcate the cluster
-    hv.vm.network "private_network", ip: "10.10.10.20", virtualbox__intnet: "intnet"
+    hv.vm.network "private_network", ip: nodes["hv"], virtualbox__intnet: "intnet"
     # Port for Hive Web UI
     hv.vm.network "forwarded_port", guest: 10002, host: 10002
     # Port for MySQL Database for Metastore
