@@ -1,9 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-require 'oj'
 node_file = File.read("data_bags/cluster/nodes.json")
-nodes = Oj.load(node_file)
+nodes = JSON.parse(node_file)
 
 Vagrant.configure("2") do |config|
 
