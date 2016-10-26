@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
       chef.add_recipe "hdphost"
       chef.data_bags_path = "data_bags"
       chef.roles_path = "roles"
-      chef.add_role("hive")
+      chef.add_role("hive_node")
     end
   end
 
