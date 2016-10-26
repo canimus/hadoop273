@@ -2,9 +2,11 @@
 
 This project is an attempt to recreate a minimalistic infrastructure that provides a training environment to experiment with **HDFS** and enable the visualization of the operation of a Hadoop Cluster in an encapsulated environment.
 
+You can always play with Enterprise Distributions of Hadoop like Cloudera Manager, HortonWorks or MapR but this is to understand what is happening behind the scenes, the details in the configuration and the footprints for each component to its lowest granularity.
+
 ## Prerequisites
 
-1. Virtual Box 
+1. Virtual Box
 2. Vagrant
 
 ## Installation
@@ -18,11 +20,14 @@ vagrant up
 
 It will create 4 virtial boxes named
 
-1. NameNode (nn)
-2. SecondaryNameNode (nn)
-3. DataNode1 (dn1)
-4. DataNode2 (dn2)
-5. DataNode3 (dn3)
+1. NameNode (nn) 10.10.10.2
+2. SecondaryNameNode (nn) 10.10.10.2
+3. DataNode1 (dn1) 10.10.10.3
+4. DataNode2 (dn2) 10.10.10.4
+5. DataNode3 (dn3) 10.10.10.5
+
+### Addition in October 2016
+6. Hive (hv) 10.10.10.6
 
 
 ## Configuration
@@ -38,3 +43,14 @@ vb.memory = 1024 # 1GB for DataNode
 ## Hardware
 
 Preferable __5GB__ of memory available in host machine
+
+
+## Playground
+To access the HDFS Name Node
+```sh
+vagrant ssh nn
+cd /vagrant/hadoop*
+bin/hdfs dfsadmin --help
+# Alternatively you can access the web browser for the NameNode WebUI Admin
+# http://localhost:50070/
+```
