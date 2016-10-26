@@ -38,9 +38,13 @@ cookbook_file "/vagrant/apache-hive-2.1.0-bin/conf/hive-env.sh" do
   mode '0755'
 end
 
-mysql_service 'mysql' do
-  port '3306'
-  version '5.6'
-  initial_root_password 'w3lcom3'
-  action [:create, :start]
+execute 'update_sources' do
+  command "apt-get update"
+  ignore_failure true
+end
+
+apt_package 'mysql-server' do
+  ignore_failure true
+  package_name 'mysql-server'
+  action :install
 end
