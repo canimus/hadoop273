@@ -61,7 +61,7 @@ Vagrant.configure("2") do |config|
     hv.vm.network "forwarded_port", guest: 3306, host: 3306
 
     hv.vm.provider "virtualbox" do |vb|
-      vb.memory = "1048"
+      vb.memory = "1580"
     end
 
     hv.vm.provision "chef_solo" do |chef|
