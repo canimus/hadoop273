@@ -29,19 +29,19 @@ template '/vagrant/apache-hive-2.1.0-bin/conf/hive-site.xml' do
   group 'vagrant'
   mode '0755'
   variables :hive => {
-    "metastoredb" => "jdbc:mysql://10.10.10.6:3306/hive?createDatabase IfNotExist=true",
+    "metastoredb" => "jdbc:mysql://0.0.0.0.6:3306/metastoredb?createDatabase IfNotExist=true",
     "driver" => "com.mysql.jdbc.Driver",
     "dbuser" => "hive",
     "dbpassword" => "hive"
   }
 end
 
-cookbook_file "/vagrant/apache-hive-2.1.0-bin/conf/hive-env.sh" do
-  source 'hive-env.sh'
-  owner 'vagrant'
-  group 'vagrant'
-  mode '0755'
-end
+# cookbook_file "/vagrant/apache-hive-2.1.0-bin/conf/hive-env.sh" do
+#   source 'hive-env.sh'
+#   owner 'vagrant'
+#   group 'vagrant'
+#   mode '0755'
+# end
 
 cookbook_file "/vagrant/apache-hive-2.1.0-bin/lib/mysql-connector-java-5.1.40-bin.jar" do
   source 'mysql-connector-java-5.1.40-bin.jar'
