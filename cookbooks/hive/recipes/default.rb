@@ -23,13 +23,18 @@ execute 'extract_hive_tar' do
   not_if { Dir.exist? "/vagrant/apache-hive-2.1.0-bin/" }
 end
 
-# template '/vagrant/apache-hive-2.1.0-bin/conf/hive-site.xml' do
-#   source 'hive-site.xml.erb'
-#   owner 'vagrant'
-#   group 'vagrant'
-#   mode '0755'
-#   variables :hdfs => {"server" => "hdfs://10.10.10.20", "port" => "10020"}
-# end
+template '/vagrant/apache-hive-2.1.0-bin/conf/hive-site.xml' do
+  source 'hive-site.xml.erb'
+  owner 'vagrant'
+  group 'vagrant'
+  mode '0755'
+  variables :hive => {
+    "metastoredb" => "jdbc:mysql://10.10.10.6:3306/hive?createDatabase IfNotExist=true",
+    "driver" => "com.mysql.jdbc.Driver",
+    "dbuser" => "hive",
+    "dbpassword" => "hive"
+  }
+end
 
 cookbook_file "/vagrant/apache-hive-2.1.0-bin/conf/hive-env.sh" do
   source 'hive-env.sh'
